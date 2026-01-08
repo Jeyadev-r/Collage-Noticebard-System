@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sri Ramachandra Notice Board</title>
+  <link rel="stylesheet" href="client/styles.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.9/index.global.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.9/index.global.min.js"></script>
+</head>
+<body>
+
+  <!-- Authentication Screen -->
+  <div id="auth-screen">
+    <div class="auth-container">
+      <div class="auth-card">
+        <div class="logo-center">
+          <div class="logo-icon">
+            <img src="data:image/png;base64,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" alt="SRMC Logo">
+          </div>
+          <h2>SRI RAMACHANDRA NOTICE BOARD</h2>
+        </div>
+
+        <div id="auth-message" class="message-box"></div>
+
+        <div class="auth-tabs">
+          <button class="tab-btn active" onclick="switchTab('login')">Login</button>
+          <button class="tab-btn" onclick="switchTab('signup')">Sign Up</button>
+        </div>
+
+        <!-- Login Form -->
+        <form id="login-form" class="auth-form">
+          <div class="form-group">
+            <label for="login-email">Email Address</label>
+            <input type="email" id="login-email" class="form-control" placeholder="Enter your email" required>
+          </div>
+          <div class="form-group">
+            <label for="login-password">Password</label>
+            <input type="password" id="login-password" class="form-control" placeholder="Enter your password" required>
+          </div>
+          <button type="submit" class="btn btn-primary btn-block">Login</button>
+        </form>
+
+        <!-- Signup Form -->
+        <form id="signup-form" class="auth-form hidden">
+          <div class="form-group">
+            <label for="signup-fullname">Full Name</label>
+            <input type="text" id="signup-fullname" class="form-control" placeholder="Enter your full name" required>
+          </div>
+          <div class="form-group">
+            <label for="signup-email">Email Address</label>
+            <input type="email" id="signup-email" class="form-control" placeholder="Enter your email" required>
+          </div>
+          <div class="form-group">
+            <label for="signup-password">Password</label>
+            <input type="password" id="signup-password" class="form-control" placeholder="Create a password" required minlength="6">
+          </div>
+          <div class="form-group">
+            <label for="signup-role">Role</label>
+            <select id="signup-role" class="form-control" required>
+              <option value="">Select Role</option>
+              <option value="student">Student</option>
+              <option value="faculty">Faculty</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="signup-program">Program</label>
+            <select id="signup-program" class="form-control" required>
+              <option value="">Select Program</option>
+              <option value="AIDA">AIDA</option>
+              <option value="AIML">AIML</option>
+              <option value="CYB & IOT">CYB & IOT</option>
+              <option value="MED ENG">MED ENG</option>
+            </select>
+          </div>
+          <button type="submit" class="btn btn-primary btn-block">Sign Up</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Dashboard -->
+  <div id="dashboard" class="hidden">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="logo">
+        <div class="logo-icon">
+          <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAAAJbSJIAAAAkFBMVEX////QJh3NAADXVlHPHxX88vHVQjvyyMbjiofOFwnQIxrPHxTPGw/55uXLAADOEgDecm7VRkH++fnTLST66un33dzfe3fhgn7aYFvww8H99fXnoJ733t3qrKr00dD119buurjednLllJHqqafttrTbaGPTODHXUUvZWVTvvr3ggHzTNS3cbGjSMCjmmpjXTUan+2EpAAAKRklEQVR4nO2ci3ayvBKGywgqiEat9fjVs1Krtvd/d5ucIOGgoGLsv+dZq11qFWcgmZnMG/r2hiAIgiAIgiAIgiAIgiAIgiAIgvw3+Xc2bUHFTD0yNm1DtdR9C0amjaiSHbEsCz5Nm1EdTbAo0DBtSFVsuYOWB23TplTDXDhoWbY3NW1MFQyIJz20/F/T1lRA/2xbMeRk2p7HU/MtFVibNujRrIilA1vTJj2WGVhJYGHaqEdySDtoeWRg2qzH8Q+8tIdWa2/arofhuFkOWpb7ZdqyR1FvqYNTzRnfpk17DGNXvW571V2YmTbuETTVKOOe3jz1KsLEtHn3s1EdtMMV/of6ggf/TBt4L3MtT7BFxafmov3Hi/C2lidEHdNV65tW3bCJ99F/18rtoXj5qL26M2rinfz6mVerrQ/dpkkT70Mbjh7EVdpSd/HPNm7Wuh9qYhhpSw2YG7PxLpaXxqJe55A/2bhZaA62EjXoVEv89nvfjJH3oLZlqIen4eok3Vh0V9+B9mc/MGrsLfSP6jCkLvo+SA8b4PuJ5QZZGTX3Br5cK4XiYcYff4zaW5rvZFvmqocWHIxaXJKMtkyId3RpP39tnTNXxH+pcTPJdJAmfephk2Qv+T3XMW14UbLbMuwyMQ8zpijjzzRunFaeg1c8tNw/op72/DwPrnn4R9TTXVYYLeihBRvT5l+nmRNlinn4B9TT7SUHC3j48urp/KKDBTx8dfV0kJsnCnto+T3TXlxAV0Fv9PCl1dMgP0+U8PCF1dOUCnqjhy+rnv5cjjIlPHzRIjxLBb3Vw5dUTz8uh1HellE8vBx07ePLNW6cZFsi9s0nAOAfPc1Dbx++StzcIt2tmfYoyb6VZaftAlin9WHhvB2I5mFYujjzbXMcviFbIY4kgBdhnJ5bng/QWzfkqpZ1TxUPparWPjT34SVOe/la6ukoGWU8F/zhRK2/kh6q5aez7IbvT7n4QurpJuFgC8h3slG/BNu2RReDPkoW2I0hgF4RefDxJPuvkmiduVDT2maDCfV2su/1ekf6aE0fnamHh4bamelvf/UL6fkv0rjRVFCPwEi5PIvZ7h06efJZDeDc3ShX6mMIapvqRdTTvqUMLkLW0eRzlicCJIwhbl6dOW6xXOKvDlH2c9ag1H6voZ4qKqgLa2lqf/sVRchLHvLRCLCLBva0CXFgfgX1NFZBbRjKebNYAcQJ0m32HQH941Q+6Y/j9/hARnK4Oqs45phXT2MVFH6lhYdeFDFsnwKSDk0Ao458SugfZVkTJphfmR8W9fiwhtXTSAVtRSf78z26Aj70Tl3OcNhd1X2RD8m4uwpf4OzO0ftt2MvBOpNjwLB6GqmgEIgBunyPIyus4hXCdhn+2nMPaVe0v4mbah+9aOJ5sBfXcRCIY9uWwSJcqqCerLAWPSVzECXAOL0gtHMnPAwv9+LYVQ4UxBPSg0AUdD/iWAbVU6mC+j5fsPa/1arETiczV3iYygGOWjO0ZACd+3w6k27y/c9CqKAk4Cmw4WtdDJKKgiMi5mG64uxqxQzx+BCe9vgRTamnQ/H1Qp8eJpbAoqpc7mQKaUJUecNSvLYI+FSd6S0eTwoYXXEfkXz/UxEqqGiMtY+pzfg8zA8ANs5b/2NzJsraAoJlGCLbo46YYz/JT5M9D6EiG5lo3AgVVMSYA6Q6pTLQ9JudTrjOJfoa3w4LOtKJRvJv6uO2UL35usUjTy/ChQoqsuA6owsVGzVdu+IEqJ0oH/ZR0zBLNPbE7OObNZ+ungoVVIhh3cw2W6seJ7JtwJoVkYfhJTzFxUpOFwt4I4O7+Oxt71wFFUN0nNMJ9s/KBuB/TQ9EtiAE6htl1B3y2nQirfAZT56qnnIVVOStWm6r24OmWo/Mmy5NE9/1mVqItXf5jVbCLxzXJJ+pnvJvFKp7voMWWy9qvd2++IlYdNMNmrSLvNH1PPWUTwz7yJ5cErUttubv5q8ODsFF/6xoDcxEraepp0IF5V+X6rKlCYPmJkv1bEch9hJ8KvBdxU9ST9u83OZlRrLLlo1NOmk1adXJuVko6SJLSHyZ9hT1VKigLquGr4jasZVZ3d0r4zv+MKtnTmwqPkM95SqoZ9N4Mc3Zv1XIwTB+XBNUOV6LxSd+xatXT4UKylcHX8VMtOXYms7o5fhciqdOwRHAg7ZQ76pWT4UK6rMI91nQQrKVH+6wjN/xRdhfFTtDwitxyatt3EgVlN1YUPQSSI1iEq2evA6vaD4LzkQP6PvFXRqVqqfypizCIviu4BWwwEl4aAGP+suCHooxM+Ilu32urHEjVVCP0K/I3Oib7aEoT79A1KVyzT4r6iEfmnLQVKeeShWUMAP317O1IOp5fwKvS+VM6hU+BG/6yB0AVamnkQrK9mtf3sCmE98PxOaTfFLqEHQ9HM38atTTqD5z2SzM3qudjX3MqraKlgv8EGwFPJRTvwr1NK7PWGgsc/7DxXArvSzYXNkDl4BN4agDXYF6GscVfn9PvfAUEhYF+s0GP+dSpyj82pr2tQ9XTxUVlJXci5L2Wd67blGpIcq/l91hG0XfB6unU0UFZaliWDQXRvYlh2mBnVE6LCIrVcZjt70rm9NbLPkWLLljCD9T9Drw1ucNo4B+LIhP9SPV05OSmVmNmHfLyBXz3ng+ZCugdvlhSk+NWiQ8Tj3VuqGsBCs9SPnYbojKmz4uPxHZMNXu5n9U40ZLDB7LS1f23WXAjPngHgI9ROl5aNnsn0up8+NBjRv9ZLu0a1l+hAnzhgf5q/DCRIENn7G6gc62HtC4SdwLytZ628IVs/JB9n9MZDex38vc6XfFQ1rP6hrOA/5pWP+op3Y23b9LjzDqYi3ugE/eS09kegRajSaC3P3qafJeUFZ1B+UKGo5PRtFmlF25ik0egSqV/xLD+171dJgYjzzqF2sDJsyrqevWtn3DIVi/p5+cwPc1blL3gtq0OpzeECUslx6vQQfqhAbA8smC7qTOPL33qKfpxO7TbJ0cKIXwt5P1mWWLUSeYzde3TGXW/KgnPbyjcZNxL6hPV9eNaFNTGToduSeKPrnlCNChrnylovDN6mnWvaCsroh2qZXn7f6P79J55lb1tK5GdFucRvM37IzFnjjVxdvUU01WaJ3agzbF/K5dbsdgoc3HWxo3iXtB3eNr3ahzIIlKpHQRnurYe/DNE5rzXr+F8zuF7fNmj/a3HYV3oPqnZBAs/U/DstIVsdl5cuim+9LAfDAYODUWS3+c8OGM3HAUj2+yafgZt3eUU0/bmVWVB/T/r9yyKpDaxZh5yHYcFNUsEoehHn5nWueXadzk3gvqkqVxDxfnnE+WUU/z7wX1YNy+zTTuIatpPu/wcPKTX7QXb9x0L800Anar/ARqwbbRaMx/f8Jfu9E8/N28ZR7aLR/yv71VtAj/7NUq4LcXEtDfQcAeVvEl9Re8MRNBEARBEARBEARBEARBEARBEARBEARBEARBEARBEARBEARBEARBEARBEARBEARBEARBEARBEAT5f+V/9VydVgxAD/kAAAAASUVORK5CYII=" alt="SRC Logo">
+        </div>
+        <div class="logo-text">
+          <h3>SRI<br>RAMACHANDRA</h3>
+          <p>Notice Management</p>
+        </div>
+      </div>
+
+      <ul class="sidebar-menu">
+        <li class="menu-item active" data-view="dashboard">
+          <span>📊</span>
+          <span class="menu-text">Dashboard</span>
+        </li>
+        <li class="menu-item" data-view="announcements">
+          <span>📢</span>
+          <span class="menu-text">Announcements</span>
+        </li>
+        <li class="menu-item" data-view="calendar">
+          <span>📅</span>
+          <span class="menu-text">Calendar</span>
+        </li>
+        <li class="menu-item admin-only hidden" data-view="users">
+          <span>👥</span>
+          <span class="menu-text">User Management</span>
+        </li>
+        <li class="menu-item faculty-only hidden" data-view="create-notice">
+          <span>➕</span>
+          <span class="menu-text">Create Notice</span>
+        </li>
+        <li class="menu-item" data-view="profile">
+          <span>👤</span>
+          <span class="menu-text">Profile</span>
+        </li>
+      </ul>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <!-- Header -->
+      <header class="header">
+        <div>
+          <h1 id="page-title">Dashboard</h1>
+          <p>Welcome back!</p>
+        </div>
+        <div class="user-profile">
+          <div>
+            <p id="header-username">User</p>
+            <p id="header-role">Role</p>
+          </div>
+          <div class="avatar" id="header-avatar">U</div>
+          <button class="btn btn-danger" onclick="logout()">Logout</button>
+        </div>
+      </header>
+
+      <!-- Alert Message -->
+      <div id="alert-message"></div>
+
+      <!-- Stats Grid (Admin Only) -->
+      <div class="stats-grid admin-only hidden">
+        <div class="stat-card">
+          <div class="stat-value" id="stat-users">0</div>
+          <div class="stat-label">Total Users</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value" id="stat-students">0</div>
+          <div class="stat-label">Students</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value" id="stat-faculty">0</div>
+          <div class="stat-label">Faculty</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value" id="stat-notices">0</div>
+          <div class="stat-label">Total Notices</div>
+        </div>
+      </div>
+
+      <!-- Dashboard View -->
+      <div id="view-dashboard" class="view-content active">
+        <div class="card">
+          <div class="card-header">
+            <h2>Recent Announcements</h2>
+            <button class="btn btn-primary faculty-only hidden" onclick="showCreateNoticeModal()">➕ Create Notice</button>
+          </div>
+          <div class="notice-grid" id="recent-notices">
+            <!-- Recent notices loaded here -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Announcements View -->
+      <div id="view-announcements" class="view-content hidden">
+        <div class="card">
+          <div class="card-header">
+            <h2>All Announcements</h2>
+            <button class="btn btn-primary faculty-only hidden" onclick="showCreateNoticeModal()">➕ Create Notice</button>
+          </div>
+          <div class="notice-grid" id="all-notices">
+            <!-- All notices loaded here -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Calendar View -->
+      <div id="view-calendar" class="view-content hidden">
+        <div class="card">
+          <div class="card-header">
+            <h2>Event Calendar</h2>
+            <button class="btn btn-primary faculty-only hidden" onclick="showCreateNoticeModal()">➕ Create Notice</button>
+          </div>
+          <div id="calendar"></div>
+        </div>
+      </div>
+
+      <!-- User Management View (Admin Only) -->
+      <div id="view-users" class="view-content hidden">
+        <div class="card">
+          <div class="card-header">
+            <h2>User Management</h2>
+            <button class="btn btn-success" onclick="showCreateUserModal()">➕ Add User</button>
+          </div>
+          <div style="overflow-x: auto;">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Email</th>
+                  <th>Role</th>
+                  <th>Program</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="users-table-body">
+                <tr>
+                  <td colspan="6" style="text-align: center; padding: 40px;">Loading users...</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Create Notice View (Faculty/Admin) -->
+      <div id="view-create-notice" class="view-content hidden">
+        <div class="card">
+          <div class="card-header">
+            <h2>Create New Notice</h2>
+          </div>
+          <form id="create-notice-form">
+            <div class="form-group">
+              <label for="notice-title">Title</label>
+              <input type="text" id="notice-title" class="form-control" required>
+            </div>
+            <div class="form-group">
+              <label for="notice-body">Description</label>
+              <textarea id="notice-body" class="form-control" required></textarea>
+            </div>
+            <div class="form-group">
+              <label for="notice-department">Department</label>
+              <select id="notice-department" class="form-control" required>
+                <option value="General">General</option>
+                <option value="AIDA">AIDA</option>
+                <option value="AIML">AIML</option>
+                <option value="CYB & IOT">CYB & IOT</option>
+                <option value="MED ENG">MED ENG</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="notice-priority">Priority</label>
+              <select id="notice-priority" class="form-control" required>
+                <option value="low">Low</option>
+                <option value="medium">Medium</option>
+                <option value="high">High</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="notice-event-date">Event Date (Optional)</label>
+              <input type="datetime-local" id="notice-event-date" class="form-control">
+            </div>
+            <div class="form-group">
+              <label for="notice-image">Upload Image (Optional)</label>
+              <input type="file" id="notice-image" class="form-control" accept="image/*">
+              <div id="image-preview"></div>
+            </div>
+            <button type="submit" class="btn btn-primary">Publish Notice</button>
+          </form>
+        </div>
+      </div>
+
+      <!-- Profile View -->
+      <div id="view-profile" class="view-content hidden">
+        <div class="card">
+          <div class="card-header">
+            <h2>My Profile</h2>
+          </div>
+          <div class="profile-info">
+            <p><strong>Full Name:</strong> <span id="profile-name">N/A</span></p>
+            <p><strong>Email:</strong> <span id="profile-email">N/A</span></p>
+            <p><strong>Role:</strong> <span id="profile-role">N/A</span></p>
+            <p><strong>Program:</strong> <span id="profile-program">N/A</span></p>
+          </div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- Create User Modal -->
+  <div id="create-user-modal" class="modal">
+    <div class="modal-content">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+        <h2 style="margin: 0;">Create New User</h2>
+        <button class="modal-close" onclick="closeCreateUserModal()">×</button>
+      </div>
+      
+      <form id="create-user-form">
+        <div class="form-group">
+          <label for="new-user-fullname">Full Name</label>
+          <input type="text" id="new-user-fullname" class="form-control" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="new-user-email">Email</label>
+          <input type="email" id="new-user-email" class="form-control" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="new-user-password">Password</label>
+          <input type="password" id="new-user-password" class="form-control" required minlength="6">
+        </div>
+        
+        <div class="form-group">
+          <label for="new-user-role">Role</label>
+          <select id="new-user-role" class="form-control" required>
+            <option value="">Select Role</option>
+            <option value="student">Student</option>
+            <option value="faculty">Faculty</option>
+            <option value="admin">Admin</option>
+          </select>
+        </div>
+        
+        <div class="form-group">
+          <label for="new-user-program">Program</label>
+          <select id="new-user-program" class="form-control" required>
+            <option value="">Select Program</option>
+            <option value="AIDA">AIDA</option>
+            <option value="AIML">AIML</option>
+            <option value="CYB & IOT">CYB & IOT</option>
+            <option value="MED ENG">MED ENG</option>
+            <option value="General">General</option>
+          </select>
+        </div>
+        
+        <div style="display: flex; gap: 10px; justify-content: flex-end; margin-top: 25px;">
+          <button type="button" class="btn btn-danger" onclick="closeCreateUserModal()">Cancel</button>
+          <button type="submit" class="btn btn-success">Create User</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Edit User Modal -->
+  <div id="edit-user-modal" class="modal">
+    <div class="modal-content">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+        <h2 style="margin: 0;">Edit User</h2>
+        <button class="modal-close" onclick="closeEditUserModal()">×</button>
+      </div>
+      
+      <form id="edit-user-form">
+        <input type="hidden" id="edit-user-id">
+        
+        <div class="form-group">
+          <label for="edit-user-fullname">Full Name</label>
+          <input type="text" id="edit-user-fullname" class="form-control" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="edit-user-email">Email</label>
+          <input type="email" id="edit-user-email" class="form-control" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="edit-user-password">New Password (leave blank to keep current)</label>
+          <input type="password" id="edit-user-password" class="form-control" placeholder="Enter new password (optional)">
+          <small style="color: #6B7280; font-size: 12px;">Leave empty to keep existing password</small>
+        </div>
+        
+        <div class="form-group">
+          <label for="edit-user-role">Role</label>
+          <select id="edit-user-role" class="form-control" required>
+            <option value="">Select Role</option>
+            <option value="student">Student</option>
+            <option value="faculty">Faculty</option>
+            <option value="admin">Admin</option>
+          </select>
+        </div>
+        
+        <div class="form-group">
+          <label for="edit-user-program">Program</label>
+          <select id="edit-user-program" class="form-control" required>
+            <option value="">Select Program</option>
+            <option value="AIDA">AIDA</option>
+            <option value="AIML">AIML</option>
+            <option value="CYB & IOT">CYB & IOT</option>
+            <option value="MED ENG">MED ENG</option>
+            <option value="General">General</option>
+          </select>
+        </div>
+        
+        <div class="form-group">
+          <label for="edit-user-status">Status</label>
+          <select id="edit-user-status" class="form-control" required>
+            <option value="true">Active</option>
+            <option value="false">Inactive</option>
+          </select>
+        </div>
+        
+        <div style="display: flex; gap: 10px; justify-content: flex-end; margin-top: 25px;">
+          <button type="button" class="btn btn-danger" onclick="closeEditUserModal()">Cancel</button>
+          <button type="submit" class="btn btn-success">Update User</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Create Notice Modal -->
+  <div id="create-notice-modal" class="modal">
+    <div class="modal-content">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+        <h2 style="margin: 0;">Create Notice</h2>
+        <button class="modal-close" onclick="closeCreateNoticeModal()">×</button>
+      </div>
+      
+      <form id="modal-notice-form">
+        <div class="form-group">
+          <label for="modal-notice-title">Title</label>
+          <input type="text" id="modal-notice-title" class="form-control" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="modal-notice-body">Description</label>
+          <textarea id="modal-notice-body" class="form-control" required></textarea>
+        </div>
+        
+        <div class="form-group">
+          <label for="modal-notice-department">Department</label>
+          <select id="modal-notice-department" class="form-control" required>
+            <option value="General">General</option>
+            <option value="AIDA">AIDA</option>
+            <option value="AIML">AIML</option>
+            <option value="CYB & IOT">CYB & IOT</option>
+            <option value="MED ENG">MED ENG</option>
+          </select>
+        </div>
+        
+        <div class="form-group">
+          <label for="modal-notice-priority">Priority</label>
+          <select id="modal-notice-priority" class="form-control" required>
+            <option value="low">Low</option>
+            <option value="medium">Medium</option>
+            <option value="high">High</option>
+          </select>
+        </div>
+        
+        <div class="form-group">
+          <label for="modal-notice-event-date">Event Date (Optional)</label>
+          <input type="datetime-local" id="modal-notice-event-date" class="form-control">
+        </div>
+        
+        <div class="form-group">
+          <label for="modal-notice-image">Upload Image (Optional)</label>
+          <input type="file" id="modal-notice-image" class="form-control" accept="image/*">
+        </div>
+        
+        <div style="display: flex; gap: 10px; justify-content: flex-end; margin-top: 25px;">
+          <button type="button" class="btn btn-danger" onclick="closeCreateNoticeModal()">Cancel</button>
+          <button type="submit" class="btn btn-primary">Publish Notice</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="client/user.js"></script>
+  <script src="client/client.js"></script>
+  <script src="client/admin.js"></script>
+
+</body>
+</html>
+
